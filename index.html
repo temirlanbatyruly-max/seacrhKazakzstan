@@ -1,0 +1,1429 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ГОС Подготовка — Полный Гайд</title>
+    <style>
+      :root {
+        --bg: #0f0f1a;
+        --surface: #1a1a2e;
+        --surface2: #16213e;
+        --accent: #7c3aed;
+        --accent2: #06b6d4;
+        --green: #10b981;
+        --yellow: #f59e0b;
+        --red: #ef4444;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --border: #2d2d4e;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      /* ── HEADER ── */
+      header {
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        padding: 60px 40px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(124, 58, 237, 0.1) 0%,
+          transparent 60%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      header h1 {
+        font-size: 48px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #7c3aed, #06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+        position: relative;
+      }
+
+      header p {
+        color: var(--muted);
+        font-size: 18px;
+        position: relative;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 4px;
+      }
+
+      .badge-purple {
+        background: rgba(124, 58, 237, 0.2);
+        color: #a78bfa;
+        border: 1px solid rgba(124, 58, 237, 0.3);
+      }
+      .badge-cyan {
+        background: rgba(6, 182, 212, 0.2);
+        color: #67e8f9;
+        border: 1px solid rgba(6, 182, 212, 0.3);
+      }
+      .badge-green {
+        background: rgba(16, 185, 129, 0.2);
+        color: #6ee7b7;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .badge-yellow {
+        background: rgba(245, 158, 11, 0.2);
+        color: #fcd34d;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+      .badge-red {
+        background: rgba(239, 68, 68, 0.2);
+        color: #fca5a5;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      /* ── NAV ── */
+      nav {
+        background: var(--surface);
+        padding: 16px 40px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      nav a:hover {
+        background: var(--accent);
+        color: white;
+      }
+
+      /* ── MAIN ── */
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+
+      /* ── SECTION ── */
+      .section {
+        margin-bottom: 60px;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .section-number {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .section-subtitle {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      /* ── ROADMAP ── */
+      .roadmap {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .roadmap-step {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        position: relative;
+        transition: transform 0.2s;
+      }
+
+      .roadmap-step:hover {
+        transform: translateY(-4px);
+      }
+
+      .roadmap-step.done {
+        border-color: var(--green);
+      }
+      .roadmap-step.partial {
+        border-color: var(--yellow);
+      }
+      .roadmap-step.todo {
+        border-color: var(--red);
+      }
+
+      .step-status {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .step-title {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .step-desc {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .step-points {
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* ── FEATURE CARD ── */
+      .feature-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 24px;
+      }
+
+      .feature-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .feature-card p {
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+
+      /* ── CODE BLOCK ── */
+      .code-block {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 20px;
+        overflow-x: auto;
+        margin: 12px 0;
+        position: relative;
+      }
+
+      .code-block pre {
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #e6edf3;
+      }
+
+      .code-label {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 11px;
+        color: var(--muted);
+        font-family: monospace;
+      }
+
+      /* syntax colors */
+      .kw {
+        color: #ff7b72;
+      }
+      .fn {
+        color: #d2a8ff;
+      }
+      .str {
+        color: #a5d6ff;
+      }
+      .cm {
+        color: #8b949e;
+        font-style: italic;
+      }
+      .num {
+        color: #79c0ff;
+      }
+      .prop {
+        color: #ffa657;
+      }
+
+      /* ── TASK BOX ── */
+      .task-box {
+        background: linear-gradient(
+          135deg,
+          rgba(124, 58, 237, 0.1),
+          rgba(6, 182, 212, 0.05)
+        );
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 16px 0;
+      }
+
+      .task-box h4 {
+        color: #a78bfa;
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .task-box ul {
+        padding-left: 20px;
+        color: var(--text);
+      }
+
+      .task-box li {
+        margin-bottom: 6px;
+      }
+
+      /* ── RESOURCE BOX ── */
+      .resource-box {
+        background: rgba(16, 185, 129, 0.05);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin: 16px 0;
+      }
+
+      .resource-box h4 {
+        color: #6ee7b7;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .resource-box a {
+        display: block;
+        color: #67e8f9;
+        text-decoration: none;
+        padding: 4px 0;
+        font-size: 14px;
+      }
+
+      .resource-box a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── WARNING BOX ── */
+      .warn-box {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin: 16px 0;
+        color: #fcd34d;
+        font-size: 14px;
+      }
+
+      /* ── GRID 2 ── */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 700px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .roadmap {
+          grid-template-columns: 1fr 1fr;
+        }
+        header {
+          padding: 40px 20px;
+        }
+        header h1 {
+          font-size: 32px;
+        }
+      }
+
+      /* ── SCORE TABLE ── */
+      .score-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      .score-table th {
+        background: var(--surface2);
+        padding: 12px 16px;
+        text-align: left;
+        color: var(--muted);
+        font-weight: 600;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .score-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .score-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .score-high {
+        color: var(--green);
+        font-weight: 700;
+      }
+      .score-mid {
+        color: var(--yellow);
+        font-weight: 700;
+      }
+
+      /* ── TEMPLATE SECTION ── */
+      .template-box {
+        background: #0d1117;
+        border: 2px solid var(--accent);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 16px 0;
+      }
+
+      .template-box h4 {
+        color: #a78bfa;
+        margin-bottom: 16px;
+        font-size: 16px;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        text-align: center;
+        padding: 40px;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>🎓 ГОС ПОДГОТОВКА</h1>
+      <p>Полный гайд по Web Development — всё что нужно знать для экзамена</p>
+      <div style="margin-top: 16px">
+        <span class="badge badge-purple">HTML 10%</span>
+        <span class="badge badge-cyan">CSS 10%</span>
+        <span class="badge badge-yellow">Responsive 10%</span>
+        <span class="badge badge-green">JavaScript 70%</span>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#roadmap">🗺 Роадмап</a>
+      <a href="#scores">📊 Баллы</a>
+      <a href="#darkmode">🌙 Dark Mode</a>
+      <a href="#modal">🪟 Modal</a>
+      <a href="#filter">🔍 Filter</a>
+      <a href="#carousel">🎠 Carousel</a>
+      <a href="#cards">🃏 Карточки</a>
+      <a href="#template">📄 Шаблон</a>
+      <a href="#tips">💡 Советы</a>
+    </nav>
+
+    <main>
+      <!-- ══════════════════════════════════════
+       ROADMAP
+  ══════════════════════════════════════ -->
+      <section class="section" id="roadmap">
+        <div class="section-header">
+          <div class="section-number">🗺</div>
+          <div>
+            <div class="section-title">Роадмап подготовки</div>
+            <div class="section-subtitle">Что умеешь, что надо выучить</div>
+          </div>
+        </div>
+
+        <div class="roadmap">
+          <div class="roadmap-step done">
+            <div class="step-status">✅</div>
+            <div class="step-title">HTML структура</div>
+            <div class="step-desc">header, main, footer, section, nav</div>
+            <div class="step-points" style="color: var(--green)">
+              10% баллов
+            </div>
+          </div>
+          <div class="roadmap-step done">
+            <div class="step-status">✅</div>
+            <div class="step-title">CSS Flexbox/Grid</div>
+            <div class="step-desc">Карточки, навбар, лейаут</div>
+            <div class="step-points" style="color: var(--green)">
+              10% баллов
+            </div>
+          </div>
+          <div class="roadmap-step partial">
+            <div class="step-status">⚠️</div>
+            <div class="step-title">Responsive</div>
+            <div class="step-desc">@media queries, mobile first</div>
+            <div class="step-points" style="color: var(--yellow)">
+              10% баллов
+            </div>
+          </div>
+          <div class="roadmap-step done">
+            <div class="step-status">✅</div>
+            <div class="step-title">Карточки из массива</div>
+            <div class="step-desc">forEach + createElement</div>
+            <div class="step-points" style="color: var(--green)">
+              10% баллов
+            </div>
+          </div>
+          <div class="roadmap-step todo">
+            <div class="step-status">❌</div>
+            <div class="step-title">Dark Mode</div>
+            <div class="step-desc">classList.toggle на body</div>
+            <div class="step-points" style="color: var(--red)">5% баллов</div>
+          </div>
+          <div class="roadmap-step todo">
+            <div class="step-status">❌</div>
+            <div class="step-title">Modal окно</div>
+            <div class="step-desc">Открыть/закрыть по клику</div>
+            <div class="step-points" style="color: var(--red)">5% баллов</div>
+          </div>
+          <div class="roadmap-step todo">
+            <div class="step-status">❌</div>
+            <div class="step-title">Search/Filter</div>
+            <div class="step-desc">filter() + input event</div>
+            <div class="step-points" style="color: var(--red)">5% баллов</div>
+          </div>
+          <div class="roadmap-step todo">
+            <div class="step-status">❌</div>
+            <div class="step-title">Carousel/Slider</div>
+            <div class="step-desc">prev/next + currentIndex</div>
+            <div class="step-points" style="color: var(--red)">5% баллов</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       SCORE TABLE
+  ══════════════════════════════════════ -->
+      <section class="section" id="scores">
+        <div class="section-header">
+          <div class="section-number">📊</div>
+          <div>
+            <div class="section-title">Таблица баллов</div>
+            <div class="section-subtitle">Что сколько стоит на ГОС</div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th>Категория</th>
+                <th>Что нужно</th>
+                <th>Баллы</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HTML семантика</td>
+                <td>header, nav, main, footer, section</td>
+                <td class="score-mid">4%</td>
+              </tr>
+              <tr>
+                <td>Доступность</td>
+                <td>alt у картинок, label у форм</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>CSS Layout</td>
+                <td>Flexbox или Grid</td>
+                <td class="score-mid">5%</td>
+              </tr>
+              <tr>
+                <td>Стили</td>
+                <td>Цвета, отступы, hover эффекты</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>Mobile 360px</td>
+                <td>@media (max-width: 480px)</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>Tablet 768px</td>
+                <td>@media (max-width: 768px)</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>Desktop 1920px</td>
+                <td>Полный лейаут на большом экране</td>
+                <td>4%</td>
+              </tr>
+              <tr>
+                <td>if/else логика</td>
+                <td>Условные проверки в JS</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>Циклы</td>
+                <td>for, forEach</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td>Функции</td>
+                <td>Переиспользуемые функции</td>
+                <td>4%</td>
+              </tr>
+              <tr>
+                <td>Массивы/Объекты</td>
+                <td>data.json структура</td>
+                <td>5%</td>
+              </tr>
+              <tr>
+                <td colspan="1"><strong>🎠 Carousel</strong></td>
+                <td>prev/next кнопки</td>
+                <td class="score-high">5%</td>
+              </tr>
+              <tr>
+                <td>Рендер из данных</td>
+                <td>forEach + innerHTML</td>
+                <td class="score-high">6%</td>
+              </tr>
+              <tr>
+                <td>DOM манипуляции</td>
+                <td>createElement, appendChild</td>
+                <td class="score-high">10%</td>
+              </tr>
+              <tr>
+                <td>Click events</td>
+                <td>addEventListener</td>
+                <td>4%</td>
+              </tr>
+              <tr>
+                <td>Input events</td>
+                <td>search, filter по вводу</td>
+                <td>3%</td>
+              </tr>
+              <tr>
+                <td colspan="1"><strong>🌙 Dark Mode</strong></td>
+                <td>toggle light/dark</td>
+                <td class="score-high">5%</td>
+              </tr>
+              <tr>
+                <td colspan="1"><strong>🪟 Modal</strong></td>
+                <td>открыть/закрыть</td>
+                <td class="score-high">5%</td>
+              </tr>
+              <tr>
+                <td colspan="1"><strong>🔍 Search/Filter</strong></td>
+                <td>фильтр по input</td>
+                <td class="score-high">5%</td>
+              </tr>
+              <tr>
+                <td>Чистый код</td>
+                <td>Комментарии, форматирование</td>
+                <td>4%</td>
+              </tr>
+              <tr>
+                <td>UI/UX</td>
+                <td>Красивый интерфейс</td>
+                <td>3%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       DARK MODE
+  ══════════════════════════════════════ -->
+      <section class="section" id="darkmode">
+        <div class="section-header">
+          <div class="section-number">🌙</div>
+          <div>
+            <div class="section-title">Dark Mode Toggle</div>
+            <div class="section-subtitle">
+              5% баллов — самая простая обязательная фича
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 Принцип работы</h3>
+          <p>
+            При клике на кнопку добавляем/убираем класс
+            <code style="color: #a78bfa">dark</code> на тег
+            <code style="color: #a78bfa">body</code>. CSS сам меняет цвета.
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">CSS</span>
+            <pre><span class="cm">/* Светлая тема — по умолчанию */</span>
+<span class="prop">body</span> {
+  <span class="prop">background</span>: <span class="str">#ffffff</span>;
+  <span class="prop">color</span>: <span class="str">#000000</span>;
+}
+
+<span class="cm">/* Тёмная тема — когда есть класс dark */</span>
+<span class="prop">body.dark</span> {
+  <span class="prop">background</span>: <span class="str">#121212</span>;
+  <span class="prop">color</span>: <span class="str">#ffffff</span>;
+}</pre>
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">JavaScript</span>
+            <pre><span class="kw">const</span> btn = document.<span class="fn">querySelector</span>(<span class="str">'#darkBtn'</span>);
+
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+  document.body.classList.<span class="fn">toggle</span>(<span class="str">'dark'</span>);
+  
+  <span class="cm">// Меняем текст кнопки</span>
+  <span class="kw">if</span> (document.body.classList.<span class="fn">contains</span>(<span class="str">'dark'</span>)) {
+    btn.textContent = <span class="str">'☀️ Light Mode'</span>;
+  } <span class="kw">else</span> {
+    btn.textContent = <span class="str">'🌙 Dark Mode'</span>;
+  }
+});</pre>
+          </div>
+
+          <div class="task-box">
+            <h4>📝 Твоё задание</h4>
+            <ul>
+              <li>Создай страницу с кнопкой "Dark Mode"</li>
+              <li>При клике меняй фон и цвет текста</li>
+              <li>Кнопка должна менять текст: "Dark Mode" ↔ "Light Mode"</li>
+              <li>Бонус: сохраняй выбор в <code>localStorage</code></li>
+            </ul>
+          </div>
+
+          <div class="resource-box">
+            <h4>📚 Где изучить</h4>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"
+              >MDN — classList.toggle()</a
+            >
+            <a
+              href="https://www.youtube.com/results?search_query=dark+mode+toggle+javascript"
+              >YouTube: dark mode toggle javascript</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       MODAL
+  ══════════════════════════════════════ -->
+      <section class="section" id="modal">
+        <div class="section-header">
+          <div class="section-number">🪟</div>
+          <div>
+            <div class="section-title">Modal окно</div>
+            <div class="section-subtitle">
+              5% баллов — появляется при клике на карточку
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 Принцип работы</h3>
+          <p>
+            Modal — это скрытый div поверх всей страницы. По клику убираем класс
+            <code style="color: #a78bfa">hidden</code>, заполняем данными.
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">HTML</span>
+            <pre><span class="cm">&lt;!-- Оверлей и модальное окно --&gt;</span>
+&lt;<span class="kw">div</span> <span class="prop">id</span>=<span class="str">"modal"</span> <span class="prop">class</span>=<span class="str">"modal hidden"</span>&gt;
+  &lt;<span class="kw">div</span> <span class="prop">class</span>=<span class="str">"modal-content"</span>&gt;
+    &lt;<span class="kw">button</span> <span class="prop">id</span>=<span class="str">"closeBtn"</span>&gt;✕&lt;/<span class="kw">button</span>&gt;
+    &lt;<span class="kw">h2</span> <span class="prop">id</span>=<span class="str">"modal-title"</span>&gt;&lt;/<span class="kw">h2</span>&gt;
+    &lt;<span class="kw">p</span> <span class="prop">id</span>=<span class="str">"modal-desc"</span>&gt;&lt;/<span class="kw">p</span>&gt;
+  &lt;/<span class="kw">div</span>&gt;
+&lt;/<span class="kw">div</span>&gt;</pre>
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">CSS</span>
+            <pre><span class="prop">.modal</span> {
+  <span class="prop">position</span>: fixed;
+  <span class="prop">inset</span>: <span class="num">0</span>;           <span class="cm">/* top:0 right:0 bottom:0 left:0 */</span>
+  <span class="prop">background</span>: <span class="fn">rgba</span>(<span class="num">0,0,0,0.7</span>);
+  <span class="prop">display</span>: flex;
+  <span class="prop">align-items</span>: center;
+  <span class="prop">justify-content</span>: center;
+  <span class="prop">z-index</span>: <span class="num">999</span>;
+}
+
+<span class="prop">.modal.hidden</span> { <span class="prop">display</span>: none; }
+
+<span class="prop">.modal-content</span> {
+  <span class="prop">background</span>: white;
+  <span class="prop">padding</span>: <span class="num">30px</span>;
+  <span class="prop">border-radius</span>: <span class="num">12px</span>;
+  <span class="prop">max-width</span>: <span class="num">500px</span>;
+  <span class="prop">width</span>: <span class="num">90%</span>;
+}</pre>
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">JavaScript</span>
+            <pre><span class="kw">const</span> modal = document.<span class="fn">getElementById</span>(<span class="str">'modal'</span>);
+<span class="kw">const</span> closeBtn = document.<span class="fn">getElementById</span>(<span class="str">'closeBtn'</span>);
+
+<span class="cm">// Открыть modal с данными карточки</span>
+<span class="kw">function</span> <span class="fn">openModal</span>(item) {
+  document.<span class="fn">getElementById</span>(<span class="str">'modal-title'</span>).textContent = item.name;
+  document.<span class="fn">getElementById</span>(<span class="str">'modal-desc'</span>).textContent = item.description;
+  modal.classList.<span class="fn">remove</span>(<span class="str">'hidden'</span>);
+}
+
+<span class="cm">// Закрыть modal</span>
+closeBtn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+  modal.classList.<span class="fn">add</span>(<span class="str">'hidden'</span>);
+});
+
+<span class="cm">// Закрыть при клике на фон</span>
+modal.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(e) {
+  <span class="kw">if</span> (e.target === modal) {
+    modal.classList.<span class="fn">add</span>(<span class="str">'hidden'</span>);
+  }
+});</pre>
+          </div>
+
+          <div class="task-box">
+            <h4>📝 Твоё задание</h4>
+            <ul>
+              <li>Создай 3 карточки с кнопкой "Подробнее"</li>
+              <li>При клике modal открывается с данными этой карточки</li>
+              <li>Кнопка ✕ закрывает modal</li>
+              <li>Клик на фон тоже закрывает</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       SEARCH / FILTER
+  ══════════════════════════════════════ -->
+      <section class="section" id="filter">
+        <div class="section-header">
+          <div class="section-number">🔍</div>
+          <div>
+            <div class="section-title">Search / Filter</div>
+            <div class="section-subtitle">
+              5% баллов — фильтрация карточек по вводу
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 Принцип работы</h3>
+          <p>
+            Слушаем событие <code style="color: #a78bfa">input</code> на поле
+            поиска. При каждом нажатии фильтруем массив и перерисовываем
+            карточки.
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">JavaScript</span>
+            <pre><span class="kw">const</span> searchInput = document.<span class="fn">getElementById</span>(<span class="str">'search'</span>);
+<span class="kw">const</span> container = document.<span class="fn">getElementById</span>(<span class="str">'container'</span>);
+
+<span class="cm">// Массив данных</span>
+<span class="kw">const</span> items = [
+  { name: <span class="str">'Tokyo'</span>, country: <span class="str">'Japan'</span>, price: <span class="num">1200</span> },
+  { name: <span class="str">'Paris'</span>, country: <span class="str">'France'</span>, price: <span class="num">900</span> },
+  { name: <span class="str">'Almaty'</span>, country: <span class="str">'Kazakhstan'</span>, price: <span class="num">300</span> },
+];
+
+<span class="cm">// Функция рендера карточек</span>
+<span class="kw">function</span> <span class="fn">renderCards</span>(data) {
+  container.innerHTML = <span class="str">''</span>;
+  data.<span class="fn">forEach</span>(<span class="kw">function</span>(item) {
+    <span class="kw">const</span> card = document.<span class="fn">createElement</span>(<span class="str">'div'</span>);
+    card.innerHTML = <span class="str">`&lt;h3&gt;${item.name}&lt;/h3&gt;&lt;p&gt;${item.country}&lt;/p&gt;`</span>;
+    container.<span class="fn">appendChild</span>(card);
+  });
+}
+
+<span class="cm">// Слушаем ввод</span>
+searchInput.<span class="fn">addEventListener</span>(<span class="str">'input'</span>, <span class="kw">function</span>() {
+  <span class="kw">const</span> query = searchInput.value.<span class="fn">toLowerCase</span>();
+  
+  <span class="kw">const</span> filtered = items.<span class="fn">filter</span>(<span class="kw">function</span>(item) {
+    <span class="kw">return</span> item.name.<span class="fn">toLowerCase</span>().<span class="fn">includes</span>(query);
+  });
+  
+  <span class="fn">renderCards</span>(filtered);
+});
+
+<span class="cm">// Показать все при загрузке</span>
+<span class="fn">renderCards</span>(items);</pre>
+          </div>
+
+          <div class="warn-box">
+            ⚠️ Ключевые методы: <strong>filter()</strong> — создаёт новый массив
+            из подходящих элементов. <strong>includes()</strong> — проверяет
+            есть ли строка внутри другой. <strong>toLowerCase()</strong> —
+            делает всё строчными буквами чтобы регистр не важен.
+          </div>
+
+          <div class="task-box">
+            <h4>📝 Твоё задание</h4>
+            <ul>
+              <li>Создай массив из 5 объектов (любая тема)</li>
+              <li>Отрисуй их как карточки</li>
+              <li>Добавь input и фильтруй по названию</li>
+              <li>Бонус: фильтруй по цене (меньше/больше числа)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       CAROUSEL
+  ══════════════════════════════════════ -->
+      <section class="section" id="carousel">
+        <div class="section-header">
+          <div class="section-number">🎠</div>
+          <div>
+            <div class="section-title">Carousel / Slider</div>
+            <div class="section-subtitle">5% баллов — самая сложная фича</div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 Принцип работы</h3>
+          <p>
+            Храним текущий индекс в переменной. Кнопки prev/next меняют индекс и
+            перерисовывают слайд.
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">HTML</span>
+            <pre>&lt;<span class="kw">div</span> <span class="prop">class</span>=<span class="str">"carousel"</span>&gt;
+  &lt;<span class="kw">button</span> <span class="prop">id</span>=<span class="str">"prev"</span>&gt;◀&lt;/<span class="kw">button</span>&gt;
+  &lt;<span class="kw">div</span> <span class="prop">id</span>=<span class="str">"slide"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="kw">button</span> <span class="prop">id</span>=<span class="str">"next"</span>&gt;▶&lt;/<span class="kw">button</span>&gt;
+&lt;/<span class="kw">div</span>&gt;</pre>
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">JavaScript</span>
+            <pre><span class="kw">const</span> items = [
+  { name: <span class="str">'Tokyo'</span>, img: <span class="str">'tokyo.jpg'</span> },
+  { name: <span class="str">'Paris'</span>, img: <span class="str">'paris.jpg'</span> },
+  { name: <span class="str">'Dubai'</span>, img: <span class="str">'dubai.jpg'</span> },
+];
+
+<span class="kw">let</span> currentIndex = <span class="num">0</span>;  <span class="cm">// текущий слайд</span>
+
+<span class="kw">function</span> <span class="fn">showSlide</span>() {
+  <span class="kw">const</span> item = items[currentIndex];
+  document.<span class="fn">getElementById</span>(<span class="str">'slide'</span>).innerHTML = <span class="str">`
+    &lt;img src="${item.img}" /&gt;
+    &lt;h3&gt;${item.name}&lt;/h3&gt;
+  `</span>;
+}
+
+document.<span class="fn">getElementById</span>(<span class="str">'next'</span>).<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+  currentIndex++;
+  <span class="kw">if</span> (currentIndex >= items.length) {
+    currentIndex = <span class="num">0</span>;  <span class="cm">// возврат к первому</span>
+  }
+  <span class="fn">showSlide</span>();
+});
+
+document.<span class="fn">getElementById</span>(<span class="str">'prev'</span>).<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+  currentIndex--;
+  <span class="kw">if</span> (currentIndex < <span class="num">0</span>) {
+    currentIndex = items.length - <span class="num">1</span>;  <span class="cm">// переход к последнему</span>
+  }
+  <span class="fn">showSlide</span>();
+});
+
+<span class="fn">showSlide</span>();  <span class="cm">// показать первый слайд сразу</span></pre>
+          </div>
+
+          <div class="warn-box">
+            ⚠️ Самое важное: <strong>currentIndex</strong> — это просто число.
+            Next: +1, Prev: -1. Если вышли за границы — возвращаемся на другой
+            конец.
+          </div>
+
+          <div class="task-box">
+            <h4>📝 Твоё задание</h4>
+            <ul>
+              <li>Создай массив из 4 объектов</li>
+              <li>Сделай кнопки prev и next</li>
+              <li>Показывай name и description текущего элемента</li>
+              <li>Бонус: добавь точки-индикаторы (●○○○)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       CARDS FROM DATA
+  ══════════════════════════════════════ -->
+      <section class="section" id="cards">
+        <div class="section-header">
+          <div class="section-number">🃏</div>
+          <div>
+            <div class="section-title">Карточки из массива данных</div>
+            <div class="section-subtitle">
+              6% баллов — основа каждого проекта на ГОС
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 Структура data.json</h3>
+          <p>
+            На экзамене дадут data.json. Вот типичная структура для любой темы:
+          </p>
+
+          <div class="code-block">
+            <span class="code-label">data.json (Travel пример)</span>
+            <pre>[
+  {
+    <span class="str">"id"</span>: <span class="num">1</span>,
+    <span class="str">"name"</span>: <span class="str">"Tokyo"</span>,
+    <span class="str">"country"</span>: <span class="str">"Japan"</span>,
+    <span class="str">"price"</span>: <span class="num">1200</span>,
+    <span class="str">"description"</span>: <span class="str">"Amazing city with rich culture"</span>,
+    <span class="str">"image"</span>: <span class="str">"assets/tokyo.jpg"</span>,
+    <span class="str">"tags"</span>: [<span class="str">"culture"</span>, <span class="str">"food"</span>, <span class="str">"modern"</span>]
+  },
+  {
+    <span class="str">"id"</span>: <span class="num">2</span>,
+    <span class="str">"name"</span>: <span class="str">"Paris"</span>,
+    <span class="str">"country"</span>: <span class="str">"France"</span>,
+    <span class="str">"price"</span>: <span class="num">900</span>,
+    <span class="str">"description"</span>: <span class="str">"City of love and art"</span>,
+    <span class="str">"image"</span>: <span class="str">"assets/paris.jpg"</span>,
+    <span class="str">"tags"</span>: [<span class="str">"art"</span>, <span class="str">"romance"</span>, <span class="str">"history"</span>]
+  }
+]</pre>
+          </div>
+
+          <div class="code-block">
+            <span class="code-label">JavaScript — рендер карточек</span>
+            <pre><span class="kw">const</span> container = document.<span class="fn">getElementById</span>(<span class="str">'cards-container'</span>);
+
+<span class="kw">function</span> <span class="fn">renderCards</span>(data) {
+  container.innerHTML = <span class="str">''</span>;  <span class="cm">// очищаем перед рендером</span>
+  
+  data.<span class="fn">forEach</span>(<span class="kw">function</span>(item) {
+    <span class="kw">const</span> card = document.<span class="fn">createElement</span>(<span class="str">'div'</span>);
+    card.className = <span class="str">'card'</span>;
+    
+    card.innerHTML = <span class="str">`
+      &lt;img src="${item.image}" alt="${item.name}" /&gt;
+      &lt;h3&gt;${item.name}&lt;/h3&gt;
+      &lt;p&gt;${item.country}&lt;/p&gt;
+      &lt;p&gt;$${item.price}&lt;/p&gt;
+      &lt;button class="details-btn"&gt;Подробнее&lt;/button&gt;
+    `</span>;
+    
+    <span class="cm">// Клик на карточку открывает modal</span>
+    card.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+      <span class="fn">openModal</span>(item);
+    });
+    
+    container.<span class="fn">appendChild</span>(card);
+  });
+}
+
+<span class="cm">// Вызываем при загрузке страницы</span>
+<span class="fn">renderCards</span>(destinations);</pre>
+          </div>
+
+          <div class="warn-box">
+            ⚠️ На ГОС данные будут в <strong>data.json</strong> файле. Так как
+            интернета нет — не нужен fetch. Просто скопируй данные из data.json
+            в JS переменную: <code>const destinations = [ ... ]</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       UNIVERSAL TEMPLATE
+  ══════════════════════════════════════ -->
+      <section class="section" id="template">
+        <div class="section-header">
+          <div class="section-number">📄</div>
+          <div>
+            <div class="section-title">Универсальный шаблон</div>
+            <div class="section-subtitle">
+              Один шаблон для всех 8 тем — просто меняй данные
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>🏗 Структура файла index.html</h3>
+          <p>
+            Всё в одном файле. Меняешь только данные и названия — структура
+            одинаковая.
+          </p>
+
+          <div class="template-box">
+            <h4>📋 Скелет index.html</h4>
+            <pre
+              style="
+                color: #e6edf3;
+                font-family: monospace;
+                font-size: 13px;
+                line-height: 1.8;
+              "
+            >
+<span style="color:#8b949e">&lt;!-- 1. HTML СТРУКТУРА --&gt;</span>
+&lt;header&gt;
+  &lt;nav&gt; Логотип + кнопка Dark Mode &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  <span style="color:#8b949e">&lt;!-- Карусель --&gt;</span>
+  &lt;section id="carousel-section"&gt;
+    &lt;button id="prev"&gt;◀&lt;/button&gt;
+    &lt;div id="slide"&gt;&lt;/div&gt;
+    &lt;button id="next"&gt;▶&lt;/button&gt;
+  &lt;/section&gt;
+
+  <span style="color:#8b949e">&lt;!-- Поиск --&gt;</span>
+  &lt;input id="search" placeholder="Поиск..." /&gt;
+
+  <span style="color:#8b949e">&lt;!-- Карточки --&gt;</span>
+  &lt;section id="cards-container"&gt;&lt;/section&gt;
+&lt;/main&gt;
+
+<span style="color:#8b949e">&lt;!-- Modal --&gt;</span>
+&lt;div id="modal" class="modal hidden"&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;button id="closeBtn"&gt;✕&lt;/button&gt;
+    &lt;div id="modal-body"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;footer&gt; Копирайт &lt;/footer&gt;
+
+<span style="color:#8b949e">&lt;!-- 2. CSS --&gt;</span>
+&lt;style&gt;
+  :root { --bg: #fff; --text: #000; }
+  body.dark { --bg: #121212; --text: #fff; }
+  body { background: var(--bg); color: var(--text); }
+  .card { ... }
+  .modal { position:fixed; inset:0; ... }
+  .hidden { display: none; }
+  @media (max-width: 768px) { ... }
+&lt;/style&gt;
+
+<span style="color:#8b949e">&lt;!-- 3. JavaScript --&gt;</span>
+&lt;script&gt;
+  <span style="color:#8b949e">// ДАННЫЕ</span>
+  const items = [ ... ];
+
+  <span style="color:#8b949e">// DARK MODE</span>
+  ...
+
+  <span style="color:#8b949e">// КАРТОЧКИ</span>
+  function renderCards(data) { ... }
+
+  <span style="color:#8b949e">// ПОИСК</span>
+  searchInput.addEventListener('input', ...) { ... }
+
+  <span style="color:#8b949e">// MODAL</span>
+  function openModal(item) { ... }
+
+  <span style="color:#8b949e">// КАРУСЕЛЬ</span>
+  let currentIndex = 0;
+  function showSlide() { ... }
+
+  <span style="color:#8b949e">// СТАРТ</span>
+  renderCards(items);
+  showSlide();
+&lt;/script&gt;</pre>
+          </div>
+
+          <div class="warn-box">
+            ⚠️ Порядок JS функций важен! Всегда пиши в таком порядке: данные →
+            dark mode → render → search → modal → carousel → вызов функций в
+            конце.
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       RESPONSIVE
+  ══════════════════════════════════════ -->
+      <section class="section" id="responsive">
+        <div class="section-header">
+          <div class="section-number">📱</div>
+          <div>
+            <div class="section-title">Responsive Design</div>
+            <div class="section-subtitle">
+              10% баллов — mobile, tablet, desktop
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>💡 3 брейкпоинта которые нужны</h3>
+
+          <div class="code-block">
+            <span class="code-label">CSS</span>
+            <pre><span class="cm">/* Desktop — по умолчанию (1920px) */</span>
+<span class="prop">.cards-grid</span> {
+  <span class="prop">display</span>: grid;
+  <span class="prop">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">4</span>, 1fr);
+  <span class="prop">gap</span>: <span class="num">24px</span>;
+}
+
+<span class="cm">/* Tablet (768px) */</span>
+@<span class="kw">media</span> (<span class="prop">max-width</span>: <span class="num">768px</span>) {
+  <span class="prop">.cards-grid</span> {
+    <span class="prop">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">2</span>, 1fr);
+  }
+  <span class="prop">nav</span> { <span class="prop">flex-direction</span>: column; }
+}
+
+<span class="cm">/* Mobile (360px) */</span>
+@<span class="kw">media</span> (<span class="prop">max-width</span>: <span class="num">480px</span>) {
+  <span class="prop">.cards-grid</span> {
+    <span class="prop">grid-template-columns</span>: 1fr;  <span class="cm">/* одна колонка */</span>
+  }
+  <span class="prop">h1</span> { <span class="prop">font-size</span>: <span class="num">24px</span>; }
+  <span class="prop">.card</span> { <span class="prop">padding</span>: <span class="num">12px</span>; }
+}</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+       TIPS
+  ══════════════════════════════════════ -->
+      <section class="section" id="tips">
+        <div class="section-header">
+          <div class="section-number">💡</div>
+          <div>
+            <div class="section-title">Советы на экзамен</div>
+            <div class="section-subtitle">
+              Как получить максимум баллов за 3 часа
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="feature-card">
+            <h3>⏱ Тайминг на 3 часа</h3>
+            <ul
+              style="padding-left: 20px; color: var(--muted); margin-top: 12px"
+            >
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">0:00 — 0:20</strong> — HTML
+                структура + data.json
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">0:20 — 0:50</strong> — CSS,
+                карточки, responsive
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">0:50 — 1:10</strong> — Рендер
+                карточек из массива
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">1:10 — 1:30</strong> — Dark Mode +
+                Search
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">1:30 — 2:00</strong> — Modal
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">2:00 — 2:40</strong> — Carousel
+              </li>
+              <li style="margin-bottom: 8px">
+                <strong style="color: white">2:40 — 3:00</strong> — Финальная
+                полировка
+              </li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <h3>✅ Чеклист перед сдачей</h3>
+            <ul
+              style="padding-left: 20px; color: var(--muted); margin-top: 12px"
+            >
+              <li style="margin-bottom: 8px">☐ header, main, footer есть</li>
+              <li style="margin-bottom: 8px">☐ alt у всех картинок</li>
+              <li style="margin-bottom: 8px">
+                ☐ Карточки рендерятся из массива
+              </li>
+              <li style="margin-bottom: 8px">☐ Dark Mode работает</li>
+              <li style="margin-bottom: 8px">☐ Search фильтрует</li>
+              <li style="margin-bottom: 8px">
+                ☐ Modal открывается и закрывается
+              </li>
+              <li style="margin-bottom: 8px">☐ Carousel prev/next работает</li>
+              <li style="margin-bottom: 8px">☐ @media для 480px и 768px</li>
+              <li style="margin-bottom: 8px">☐ Комментарии в коде</li>
+              <li style="margin-bottom: 8px">☐ hover эффекты на кнопках</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" style="margin-top: 16px">
+          <h3>⚠️ Частые ошибки</h3>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 16px;
+              margin-top: 12px;
+            "
+          >
+            <div style="color: var(--red)">
+              <p style="font-weight: 700; margin-bottom: 8px">❌ Ошибки</p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                querySelector вместо querySelectorAll для списков
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                Забыть innerHTML = '' перед рендером
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                data.name вместо data[0].name для массивов
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                Забыть вызвать функцию в конце
+              </p>
+            </div>
+            <div style="color: var(--green)">
+              <p style="font-weight: 700; margin-bottom: 8px">✅ Правильно</p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                querySelectorAll + forEach для нескольких элементов
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                container.innerHTML = '' в начале renderCards
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                Проверять JSON в браузере перед кодом
+              </p>
+              <p
+                style="color: var(--muted); font-size: 14px; margin-bottom: 6px"
+              >
+                renderCards(items) в самом конце скрипта
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-box" style="margin-top: 16px">
+          <h4>📚 Ресурсы для изучения</h4>
+          <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript"
+            >MDN Web Docs (на русском) — лучший справочник</a
+          >
+          <a href="https://learn.javascript.ru"
+            >learn.javascript.ru — полный курс JS на русском</a
+          >
+          <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+            >CSS Tricks — Flexbox гайд</a
+          >
+          <a href="https://css-tricks.com/snippets/css/complete-guide-grid/"
+            >CSS Tricks — Grid гайд</a
+          >
+          <a
+            href="https://www.youtube.com/results?search_query=javascript+modal+window+tutorial"
+            >YouTube: javascript modal window</a
+          >
+          <a
+            href="https://www.youtube.com/results?search_query=javascript+carousel+slider+tutorial"
+            >YouTube: javascript carousel slider</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>ГОС Подготовка — Web Development 2024–2025 | Удачи на экзамене! 🚀</p>
+    </footer>
+  </body>
+</html>
